@@ -42,8 +42,10 @@ class IncomeInput extends React.Component{
         return(
             <div>
                 <form onSubmit={this.handleSubmit}>
-                    <input type='text' name='' value={this.state.text} onChange={this.handleTextChange} required/>
-                    <input type='number' min='.01' step='.01' value={this.state.money} onChange={this.handleMoneyChange} required />
+                    <label for='incText'>Name of Income</label>
+                    <input type='text' name='text' id='incText' value={this.state.text} onChange={this.handleTextChange} required/>
+                    <label for='incMoney'>Money gained</label>
+                    <input type='number' name='number' id='incMoney' min='.01' step='.01' value={this.state.money} onChange={this.handleMoneyChange} required />
                     <input type='submit' value='submit' />
                 </form>
                 <Income list={this.state.incomeArr} action={()=>this.setState({incomeArr: [...this.state.incomeArr]})}/>

@@ -42,8 +42,10 @@ class ExpenseInput extends React.Component{
         return(
             <div>
                 <form onSubmit={this.handleSubmit}>
-                    <input type='text' value={this.state.text} onChange={this.handleTextChange} required/>
-                    <input type='number' min='.01' step='.01' value={this.state.money} onChange={this.handleMoneyChange} required />
+                    <label for='expText'>Name of Expense</label>
+                    <input type='text' id='expText' value={this.state.text} onChange={this.handleTextChange} required/>
+                    <label for="expMoney">Money Lost</label>
+                    <input type='number' id='expMoney' min='.01' step='.01' value={this.state.money} onChange={this.handleMoneyChange} required />
                     <input type='submit' value='submit' />
                 </form>
                 <Expense list={this.state.expenseArr} action={()=>this.setState({expenseArr: [...this.state.expenseArr]})}/>
