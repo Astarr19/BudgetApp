@@ -1,10 +1,16 @@
 import React from 'react';
-import './income.css';
+import './App.css';
 
 function Income(props) {
     let incomeArr = props.list
     const incomeList = incomeArr.map((el, index)=>{
-        return <li key={index}>{el.text}<mark>${el.money}</mark><button className='delete' onClick={()=>remove([index])} >X</button></li>
+        return (
+            <li key={index} className='list-item'>
+                <p>{el.text}</p>
+                <p>${el.money}</p>
+                <button className='delete' onClick={()=>remove([index])} >X</button>
+            </li>
+        )
     })
     const remove = (index) => {
         incomeArr.splice(index, 1);
@@ -12,7 +18,7 @@ function Income(props) {
     }
     return (
         <div>
-            <ul>{incomeList}</ul>
+            <ul className='list-container'>{incomeList}</ul>
             {incomeList.length === 0 && <h1>Add your incomes above!</h1>}
         </div>
     )

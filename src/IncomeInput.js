@@ -1,6 +1,6 @@
 import React from 'react';
 import Income from './income';
-import './income.css'
+import './App.css'
 
 class IncomeInput extends React.Component{
     constructor(props) {
@@ -31,6 +31,7 @@ class IncomeInput extends React.Component{
             this.setState({text: '', money: ''});
         });
     }
+
     componentDidMount= () =>{
         this.handleSubmit(null);
     }
@@ -44,9 +45,9 @@ class IncomeInput extends React.Component{
                 <form onSubmit={this.handleSubmit}>
                     <label for='incText'>Name of Income</label>
                     <input type='text' name='text' id='incText' value={this.state.text} onChange={this.handleTextChange} required/>
-                    <label for='incMoney'>Money gained</label>
+                    <label for='incMoney'>Money Earned</label>
                     <input type='number' name='number' id='incMoney' min='.01' step='.01' value={this.state.money} onChange={this.handleMoneyChange} required />
-                    <input type='submit' value='submit' />
+                    <input type='submit' value='Add to list' />
                 </form>
                 <Income list={this.state.incomeArr} action={()=>this.setState({incomeArr: [...this.state.incomeArr]})}/>
             </div>

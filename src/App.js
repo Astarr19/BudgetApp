@@ -7,6 +7,7 @@ function App() {
   let [total, setTotal] = useState();
   let [incomes, setIncomes] = useState();
   let [expenses, setExpenses] = useState();
+  let [months, setMonths] = useState(1);
 
   const calcTotal = () => {
     setTotal((incomes - expenses).toFixed(2));
@@ -46,8 +47,14 @@ function App() {
         </div>
       </div>
       <div className='total'>
-        <h1>Monthly Gain/Loss</h1>
-        <h1 className={((total >= 0) ? 'positive' : 'negative')}>${total}</h1>
+        <div className='monthly'>
+          <h1>Monthly Gain/Loss</h1>
+          <h1 className={((total >= 0) ? 'positive' : 'negative')}>${total}</h1>
+        </div>
+        <div className='custom-time'>
+          <h1>Total cash after <input type='number' onChange={event =>setMonths(event.target.value)} min='1' value={months}/> months</h1>
+          <h1 className={((total >= 0) ? 'positive' : 'negative')}>${(total * months).toFixed(2)}</h1>
+        </div>
       </div>
     </div>
   );
