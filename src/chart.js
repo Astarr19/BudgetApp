@@ -11,11 +11,11 @@ function Chart(props) {
             type: "line",
             color: "black",
             dataPoints: [
-                {label: "Tuesdays", y:25, color: "black"},
-                {label: "Jeffrey", y:40, color: "green"},
-                {label: "Is", y:15, color: "red"},
-                {label: "Big", y:35, color: "green"},
-                {label: "Bitch", y:-10, color: "red"}
+                {label: "January", y:25, color: "black"},
+                {label: "February", y:40, color: "green"},
+                {label: "March", y:15, color: "red"},
+                {label: "April", y:35, color: "green"},
+                {label: "May", y:-10, color: "red"}
             ]
         }]
     }
