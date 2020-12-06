@@ -11,19 +11,15 @@ class IncomeInput extends React.Component{
             text: 'Job',
             money: 324.59
         }
-
-        this.handleTextChange = this.handleTextChange.bind(this);
-        this.handleMoneyChange = this.handleMoneyChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleMoneyChange(event) {
+    handleMoneyChange = (event) => {
         this.setState({money: event.target.value});
     }
-    handleTextChange(event) {
+    handleTextChange = (event) => {
         this.setState({text: event.target.value});
     }
-    handleSubmit(event) {
+    handleSubmit = (event) => {
         if (event !== null) {
             event.preventDefault();
         }
@@ -31,6 +27,10 @@ class IncomeInput extends React.Component{
             this.props.action(this.state.incomeArr);
             this.setState({text: '', money: ''});
         });
+    }
+    handleDelete = () => {
+        this.setState({incomeArr: [...this.state.incomeArr]});
+        this.props.action(this.state.incomeArr);
     }
 
     componentDidMount= () =>{
@@ -47,7 +47,7 @@ class IncomeInput extends React.Component{
                     <input type='number' name='number' id='incMoney' min='.01' step='.01' value={this.state.money} onChange={this.handleMoneyChange} required />
                     <input type='submit' value='Add to list' />
                 </form>
-                <Income list={this.state.incomeArr} action={()=>this.setState({incomeArr: [...this.state.incomeArr]})}/>
+                <Income list={this.state.incomeArr} action={this.handleDelete}/>
             </div>
         )
     }

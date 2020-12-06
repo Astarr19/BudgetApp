@@ -31,9 +31,14 @@ class ExpenseInput extends React.Component{
             this.setState({text: '', money: ''})
         })
     }
+    handleDelete = () => {
+        this.setState({expenseArr: [...this.state.expenseArr]});
+        this.props.action(this.state.expenseArr);
+    }
     componentDidMount = () => {
         this.handleSubmit(null);
     }
+    
     
     render() {
         return(
@@ -45,7 +50,7 @@ class ExpenseInput extends React.Component{
                     <input type='number' id='expMoney' min='.01' step='.01' value={this.state.money} onChange={this.handleMoneyChange} required />
                     <input type='submit' value='Add to List' />
                 </form>
-                <Expense list={this.state.expenseArr} action={()=>this.setState({expenseArr: [...this.state.expenseArr]})}/>
+                <Expense list={this.state.expenseArr} action={this.handleDelete}/>
             </div>
         )
     }
