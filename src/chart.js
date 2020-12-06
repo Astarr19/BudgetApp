@@ -1,7 +1,7 @@
 import React from 'react';
 import CanvasJSReact from './assests/canvasjs.react';
 
-const CanvasJS = CanvasJSReact.CanvasJS;
+//const CanvasJS = CanvasJSReact.CanvasJS;
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 function Chart(props) {

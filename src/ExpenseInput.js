@@ -34,9 +34,6 @@ class ExpenseInput extends React.Component{
     componentDidMount = () => {
         this.handleSubmit(null);
     }
-    componentDidUpdate = () => {
-        this.props.action(this.state.expenseArr);
-    }
     
     render() {
         return(

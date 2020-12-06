@@ -6,6 +6,7 @@ class IncomeInput extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
+            monthArr: [],
             incomeArr: [],
             text: 'Job',
             money: 324.59
@@ -34,9 +35,6 @@ class IncomeInput extends React.Component{
 
     componentDidMount= () =>{
         this.handleSubmit(null);
-    }
-    componentDidUpdate = () =>{
-        this.props.action(this.state.incomeArr);
     }
     
     render() {
