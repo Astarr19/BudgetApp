@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 
 function Income(props) {
-    let incomeArr = props.list
+    let incomeArr = props.list;
     const incomeList = incomeArr.map((el, index)=>{
         return (
             <li key={index} className='list-item'>
@@ -19,7 +19,7 @@ function Income(props) {
     return (
         <div>
             <ul className='list-container'>{incomeList}</ul>
-            {incomeList.length === 0 && <h1>Add your incomes above!</h1>}
+            {(incomeList && incomeList.length === 0) && <h1>Add your incomes above!</h1>}
         </div>
     )
 }

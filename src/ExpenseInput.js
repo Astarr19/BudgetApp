@@ -1,58 +1,55 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Expense from './expense';
-import './App.css';
+import './App.css'
 
-class ExpenseInput extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            expenseArr: [],
-            text: 'Rent',
-            money: 250
+function ExpenseInput(props) {
+    const [text, setText] = useState();
+    const [money, setMoney] = useState();
+    const [expenses, setExpenses] = useState({
+        "January":[],
+        "February":[],
+        "March":[],
+        "April":[],
+        "May":[],
+        "June":[],
+        "July":[],
+        "August":[],
+        "September":[],
+        "October":[],
+        "November":[],
+        "December":[]
+    });
+    let {action, month} = props;
+
+    const handleSubmit = (event) => {
+        if (event !== null) {
+            event.preventDefault();
         }
-
-        this.handleTextChange = this.handleTextChange.bind(this);
-        this.handleMoneyChange = this.handleMoneyChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        setExpenses({...expenses, [props.month]:[...expenses[props.month], {text: text, money: money}]});
+        setText('');
+        setMoney('');
+    }
+    const handleDelete = () => {
+        action(expenses[props.month]);
     }
 
-    handleMoneyChange(event) {
-        this.setState({money: event.target.value});
-    }
-    handleTextChange(event) {
-        this.setState({text: event.target.value});
-    }
-    handleSubmit = (e) => {
-        if (e !== null) {
-            e.preventDefault();
-        }
-        this.setState({expenseArr: [...this.state.expenseArr, {text: this.state.text, money: parseFloat(this.state.money).toFixed(2)}]},()=>{
-            this.props.action(this.state.expenseArr);
-            this.setState({text: '', money: ''})
-        })
-    }
-    handleDelete = () => {
-        this.setState({expenseArr: [...this.state.expenseArr]});
-        this.props.action(this.state.expenseArr);
-    }
-    componentDidMount = () => {
-        this.handleSubmit(null);
-    }
+    useEffect(()=>{
+        action(expenses[month]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [expenses, month])
+
     
-    
-    render() {
-        return(
-            <div>
-                <form onSubmit={this.handleSubmit}>
-                    <label for='expText'>Name of Expense</label>
-                    <input type='text' id='expText' value={this.state.text} onChange={this.handleTextChange} required/>
-                    <label for="expMoney">Money Spent</label>
-                    <input type='number' id='expMoney' min='.01' step='.01' value={this.state.money} onChange={this.handleMoneyChange} required />
-                    <input type='submit' value='Add to List' />
-                </form>
-                <Expense list={this.state.expenseArr} action={this.handleDelete}/>
-            </div>
-        )
-    }
+    return(
+        <div>
+            <form onSubmit={handleSubmit}>
+                <label for='incText'>Type of Expense</label>
+                <input type='text' name='text' id='incText' value={text} onChange={e=>setText(e.target.value)} required/>                    
+                <label for='incMoney'>Money Spent</label>
+                <input type='number' name='number' id='incMoney' min='.01' step='.01' value={money} onChange={e=>setMoney(e.target.value)} required />
+                <input type='submit' value='Add to list' />
+            </form>
+            <Expense list={expenses[month]} action={handleDelete} />
+        </div>
+    )
 }
 export default ExpenseInput;

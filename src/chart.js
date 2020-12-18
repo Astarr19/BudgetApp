@@ -5,18 +5,23 @@ import CanvasJSReact from './assests/canvasjs.react';
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 function Chart(props) {
+    let dataArr = Object.getOwnPropertyNames(props.data);
+    const formatData = (data) => {
+        let formatted = [];
+        for (let i=0; i < dataArr.length; i++) {
+            let label = dataArr[i];
+            let y = parseFloat(data[dataArr[i]]);
+            formatted.push({label: label, y: y, color: "black"})
+        }
+        console.log(formatted);
+        return formatted;
+    }
     const options = {
-        title: {text: 'Test time boyo'},
+        title: {text: 'I\'ll think of an actual title later'},
         data: [{
             type: "line",
             color: "black",
-            dataPoints: [
-                {label: "January", y:25, color: "black"},
-                {label: "February", y:40, color: "green"},
-                {label: "March", y:15, color: "red"},
-                {label: "April", y:35, color: "green"},
-                {label: "May", y:-10, color: "red"}
-            ]
+            dataPoints: formatData(props.data)
         }]
     }
     return (

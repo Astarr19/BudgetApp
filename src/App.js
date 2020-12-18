@@ -1,27 +1,28 @@
-import React, {useEffect, useState} from 'react';
+import React, {useReducer, useState} from 'react';
 import IncomeInput from './IncomeInput';
 import ExpenseInput from './ExpenseInput';
 import Chart from './chart';
 import './App.css';
 
 function App() {
-  let [total, setTotal] = useState({});
+  
   let [incomes, setIncomes] = useState({});
   let [expenses, setExpenses] = useState({});
   let [month, setMonth] = useState("January");
 
-  const objProps = (month, attribute) =>{
-    let value = {};
-    Object.defineProperty(value, month, attribute);
-    return value;
+  const reducer = (state, action) => {
+    return {...state, [month]: (incomes[month] - expenses[month]).toFixed(2)}
   }
+  let [total, dispatch] = useReducer(reducer, {});
+
 
   const getIncomes = (array) => {
     let sum = 0;
     array.forEach(el=>{
       sum += parseFloat(el.money);
     });
-    setIncomes(objProps(month, {value: sum.toFixed(2)}));
+    setIncomes({...incomes, [month]: sum.toFixed(2)});
+    dispatch();
   }
 
   const getExpenses = (array) => {
@@ -29,15 +30,14 @@ function App() {
     array.forEach(el=>{
       sum += parseFloat(el.money);
     });
-    setExpenses(objProps(month, {value: sum.toFixed(2)}));
+    setExpenses({...expenses, [month]: sum.toFixed(2)});
+    dispatch();
   }
 
-  useEffect(()=>{
-    setTotal(objProps(month, {value: (incomes[month] - expenses[month]).toFixed(2)}));
-  }, [incomes, expenses, month])
   
   return (
     <div className='container'>
+      <h1 className="title">Budget Calculator</h1>
       <div className='incomeExpense'>
         <form>
           <select value={month} onChange={(e)=>setMonth(e.target.value)}>

@@ -1,55 +1,55 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Income from './income';
 import './App.css'
 
-class IncomeInput extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            monthArr: [],
-            incomeArr: [],
-            text: 'Job',
-            money: 324.59
-        }
-    }
+function IncomeInput(props) {
+    const [text, setText] = useState();
+    const [money, setMoney] = useState();
+    const [incomes, setIncomes] = useState({
+        "January":[],
+        "February":[],
+        "March":[],
+        "April":[],
+        "May":[],
+        "June":[],
+        "July":[],
+        "August":[],
+        "September":[],
+        "October":[],
+        "November":[],
+        "December":[]
+    });
+    let {action, month} = props;
 
-    handleMoneyChange = (event) => {
-        this.setState({money: event.target.value});
-    }
-    handleTextChange = (event) => {
-        this.setState({text: event.target.value});
-    }
-    handleSubmit = (event) => {
+    const handleSubmit = (event) => {
         if (event !== null) {
             event.preventDefault();
         }
-        this.setState({incomeArr: [...this.state.incomeArr, {text: this.state.text, money: parseFloat(this.state.money).toFixed(2)}]}, ()=>{
-            this.props.action(this.state.incomeArr);
-            this.setState({text: '', money: ''});
-        });
+        setIncomes({...incomes, [props.month]:[...incomes[props.month], {text: text, money: money}]});
+        setText('');
+        setMoney('');
     }
-    handleDelete = () => {
-        this.setState({incomeArr: [...this.state.incomeArr]});
-        this.props.action(this.state.incomeArr);
+    const handleDelete = () => {
+        action(incomes[props.month]);
     }
 
-    componentDidMount= () =>{
-        this.handleSubmit(null);
-    }
+    useEffect(()=>{
+        action(incomes[month]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [incomes, month])
+
     
-    render() {
-        return(
-            <div>
-                <form onSubmit={this.handleSubmit}>
-                    <label for='incText'>Name of Income</label>
-                    <input type='text' name='text' id='incText' value={this.state.text} onChange={this.handleTextChange} required/>
-                    <label for='incMoney'>Money Earned</label>
-                    <input type='number' name='number' id='incMoney' min='.01' step='.01' value={this.state.money} onChange={this.handleMoneyChange} required />
-                    <input type='submit' value='Add to list' />
-                </form>
-                <Income list={this.state.incomeArr} action={this.handleDelete}/>
-            </div>
-        )
-    }
+    return(
+        <div>
+            <form onSubmit={handleSubmit}>
+                <label for='incText'>Type of Income</label>
+                <input type='text' name='text' id='incText' value={text} onChange={e=>setText(e.target.value)} required/>                    
+                <label for='incMoney'>Money Earned</label>
+                <input type='number' name='number' id='incMoney' min='.01' step='.01' value={money} onChange={e=>setMoney(e.target.value)} required />
+                <input type='submit' value='Add to list' />
+            </form>
+            <Income list={incomes[month]} action={handleDelete} />
+        </div>
+    )
 }
 export default IncomeInput;

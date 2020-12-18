@@ -1,7 +1,8 @@
 import React from 'react';
+import './App.css';
 
 function Expense(props) {
-    let expenseArr = props.list
+    let expenseArr = props.list;
     const expenseList = expenseArr.map((el, index)=>{
         return (
             <li key={index} className='list-item'>
@@ -18,7 +19,7 @@ function Expense(props) {
     return (
         <div>
             <ul className='list-container'>{expenseList}</ul>
-            {expenseList.length === 0 && <h1>Add your expenses above!</h1>}
+            {(expenseList && expenseList.length === 0) && <h1>Add your expenses above!</h1>}
         </div>
     )
 }
