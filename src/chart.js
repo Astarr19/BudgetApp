@@ -6,23 +6,45 @@ const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 function Chart(props) {
     let dataArr = Object.getOwnPropertyNames(props.data);
+    const colorPicker = (current, prev) => {
+        if (prev === null || current === 0) {
+            return "black";
+        } else {
+            return (current >= 0) ? "green" : "red";
+        }
+    }
     const formatData = (data) => {
         let formatted = [];
+        let prevTotal, color;
+        
         for (let i=0; i < dataArr.length; i++) {
-            let label = dataArr[i];
+            if (isNaN(prevTotal)) {
+                color = colorPicker(parseFloat(data[dataArr[i]]), null);
+                prevTotal = 0;
+            } else {
+                color = colorPicker(parseFloat(data[dataArr[i]]), prevTotal);
+            }
+            let label = dataArr[i].split("", 3).join("");
             let y = parseFloat(data[dataArr[i]]);
-            formatted.push({label: label, y: y, color: "black"})
+            prevTotal += y;
+            formatted.push({label: label, y: prevTotal, color: color})
         }
-        console.log(formatted);
         return formatted;
     }
     const options = {
-        title: {text: 'I\'ll think of an actual title later'},
+        title: {text: 'All of these names are dumb'},
         data: [{
             type: "line",
             color: "black",
             dataPoints: formatData(props.data)
-        }]
+        }],
+        axisX:{
+            title: 'Months',
+            interval: 1
+        },
+        axisY:{
+            title:'Currency (USD)'
+        }
     }
     return (
         <div>

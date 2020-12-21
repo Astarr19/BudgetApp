@@ -3,8 +3,8 @@ import Expense from './expense';
 import './App.css'
 
 function ExpenseInput(props) {
-    const [text, setText] = useState();
-    const [money, setMoney] = useState();
+    const [text, setText] = useState("Rent");
+    const [money, setMoney] = useState(1468);
     const [expenses, setExpenses] = useState({
         "January":[],
         "February":[],

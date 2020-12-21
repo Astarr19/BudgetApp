@@ -3,8 +3,8 @@ import Income from './income';
 import './App.css'
 
 function IncomeInput(props) {
-    const [text, setText] = useState();
-    const [money, setMoney] = useState();
+    const [text, setText] = useState("Salary");
+    const [money, setMoney] = useState(3714);
     const [incomes, setIncomes] = useState({
         "January":[],
         "February":[],

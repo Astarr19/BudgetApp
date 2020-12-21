@@ -9,11 +9,24 @@ function App() {
   let [incomes, setIncomes] = useState({});
   let [expenses, setExpenses] = useState({});
   let [month, setMonth] = useState("January");
+  let [prevCheck, setPrev] = useState(false);
+  let [nextCheck, setNext] = useState(true);
+  let [hidden, setHidden] = useState("hide");
 
   const reducer = (state, action) => {
     return {...state, [month]: (incomes[month] - expenses[month]).toFixed(2)}
   }
   let [total, dispatch] = useReducer(reducer, {});
+
+  const monthReducer = (state, action) => {
+    let arr = Object.values(total);
+    let sum = 0;
+    arr.forEach(el=>{
+      sum += parseFloat(el);
+    })
+    return sum.toFixed(2);
+  }
+  let [monthSum, monthDispatch] = useReducer(monthReducer, 0);
 
 
   const getIncomes = (array) => {
@@ -23,6 +36,7 @@ function App() {
     });
     setIncomes({...incomes, [month]: sum.toFixed(2)});
     dispatch();
+    monthDispatch();
   }
 
   const getExpenses = (array) => {
@@ -32,29 +46,82 @@ function App() {
     });
     setExpenses({...expenses, [month]: sum.toFixed(2)});
     dispatch();
+    monthDispatch();
   }
+
+  const nextMonth = () => {
+    switch (month) {
+      case "January" :
+        setPrev(true);
+        return "February";
+      case "February" :
+        return "March";
+      case "March" :
+        return "April";
+      case "April" :
+        return "May";
+      case "May" :
+        return "June";
+      case "June" :
+        return "July";
+      case "July" :
+        return "August";
+      case "August" :
+        return "September";
+      case "September" :
+        return "October";
+      case "October" :
+        return "November";
+      case "November" :
+        setNext(false)
+        return "December";
+      default:
+        break;
+    }
+  }
+
+  const lastMonth = () => {
+    switch (month) {
+      case "December" :
+        setNext(true);
+        return "November";
+      case "November" :
+        return "October";
+      case "October" :
+        return "September";
+      case "September" :
+        return "August";
+      case "August" :
+        return "July";
+      case "July" :
+        return "June";
+      case "June" :
+        return "May";
+      case "May" :
+        return "April";
+      case "April" :
+        return "March";
+      case "March" :
+        return "February";
+      case "February" :
+        setPrev(false)
+        return "January";
+      default:
+        break;
+    }
+  }
+
+  const toggleChart = () => setHidden((hidden === "hide") ? "show" : "hide");
 
   
   return (
     <div className='container'>
-      <h1 className="title">Budget Calculator</h1>
+      <div className="monthDisplay">
+        <button disabled={!prevCheck} onClick={()=>setMonth(lastMonth)}>Last Month</button>
+        <h1>{month}</h1>
+        <button disabled={!nextCheck} onClick={()=>setMonth(nextMonth)}>Next Month</button>
+      </div>
       <div className='incomeExpense'>
-        <form>
-          <select value={month} onChange={(e)=>setMonth(e.target.value)}>
-            <option value="January">January</option>
-            <option value="February">February</option>
-            <option value="March">March</option>
-            <option value="April">April</option>
-            <option value="May">May</option>
-            <option value="June">June</option>
-            <option value="July">July</option>
-            <option value="August">August</option>
-            <option value="September">September</option>
-            <option value="October">October</option>
-            <option value="November">November</option>
-            <option value="December">December</option>
-          </select>
-        </form>
         <div className='income'>
           <h1>Incomes</h1>
           <IncomeInput action={getIncomes} month={month}/>
@@ -71,8 +138,15 @@ function App() {
           <h1>Monthly Gain/Loss</h1>
           <h1 className={((total[month] >= 0) ? 'positive' : 'negative')}>${total[month]}</h1>
         </div>
+        <div className='yearly'>
+          <h1>Yearly Gain/Loss</h1>
+          <h1 className={((monthSum >= 0) ? 'positive' : 'negative')}>${monthSum}</h1>
+        </div>
       </div>
-      <Chart data={total}/>
+      <div id="chart" className={hidden}>
+        <button onClick={toggleChart}>{(hidden === "hide") ? "Show" : "Hide"} Chart</button>
+        <Chart data={total}/>
+      </div>
     </div>
   );
 }
