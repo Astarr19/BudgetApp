@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/BudgetApp/static/css/main.9638497b.chunk.css",
-    "main.js": "/BudgetApp/static/js/main.4151a26d.chunk.js",
-    "main.js.map": "/BudgetApp/static/js/main.4151a26d.chunk.js.map",
+    "main.css": "/BudgetApp/static/css/main.597fa4a8.chunk.css",
+    "main.js": "/BudgetApp/static/js/main.4bb2c181.chunk.js",
+    "main.js.map": "/BudgetApp/static/js/main.4bb2c181.chunk.js.map",
     "runtime-main.js": "/BudgetApp/static/js/runtime-main.ec138f8f.js",
     "runtime-main.js.map": "/BudgetApp/static/js/runtime-main.ec138f8f.js.map",
     "static/js/2.3ed16318.chunk.js": "/BudgetApp/static/js/2.3ed16318.chunk.js",
     "static/js/2.3ed16318.chunk.js.map": "/BudgetApp/static/js/2.3ed16318.chunk.js.map",
     "index.html": "/BudgetApp/index.html",
-    "precache-manifest.0bd0e765b1cbcc045a2ba5f610413fcf.js": "/BudgetApp/precache-manifest.0bd0e765b1cbcc045a2ba5f610413fcf.js",
+    "precache-manifest.81f4c341f5ca086f0cef556a9af01028.js": "/BudgetApp/precache-manifest.81f4c341f5ca086f0cef556a9af01028.js",
     "service-worker.js": "/BudgetApp/service-worker.js",
-    "static/css/main.9638497b.chunk.css.map": "/BudgetApp/static/css/main.9638497b.chunk.css.map",
+    "static/css/main.597fa4a8.chunk.css.map": "/BudgetApp/static/css/main.597fa4a8.chunk.css.map",
     "static/js/2.3ed16318.chunk.js.LICENSE.txt": "/BudgetApp/static/js/2.3ed16318.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.ec138f8f.js",
     "static/js/2.3ed16318.chunk.js",
-    "static/css/main.9638497b.chunk.css",
-    "static/js/main.4151a26d.chunk.js"
+    "static/css/main.597fa4a8.chunk.css",
+    "static/js/main.4bb2c181.chunk.js"
   ]
 }
