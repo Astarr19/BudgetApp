@@ -75,6 +75,7 @@ li {
 
 #chart {
   position: fixed;
+  top: 10px;
   border: 2px solid black;
   width: 670px;
   transition: .3s;
