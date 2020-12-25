@@ -7,6 +7,15 @@ form {
   flex-flow: column nowrap;
 }
 
+button {
+  outline: none;
+  transition: .1s;
+}
+
+button:active {
+  transform: translateY(4px)
+}
+
 ul {
   padding: 0;
 }
@@ -48,10 +57,11 @@ li {
 .incomeExpense {
   display: flex;
   justify-content: space-around;
+  margin-top: 70px;
 }
 
 .monthDisplay {
-  position: sticky;
+  position: fixed;
   top:0px;
   left: 0px;
   right: 0px;
@@ -59,6 +69,7 @@ li {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  background-color: #fdf5e6;
   border-bottom: 1px solid gray;
 }
 
@@ -75,11 +86,11 @@ li {
 }
 
 .hide {
-  left: -50%;
+  left: -675px;
 }
 
 .show {
-  left: 0;
+  left: 5px;
 }
 
 .monthDisplay button {
@@ -111,4 +122,14 @@ li {
 
 .negative {
   color: red;
+}
+
+@media screen and (max-width: 768px) {
+  #chart {
+    width: 300px;
+  }
+
+  .hide {
+    left: -305px;
+  }
 }

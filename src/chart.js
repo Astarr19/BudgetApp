@@ -32,7 +32,7 @@ function Chart(props) {
         return formatted;
     }
     const options = {
-        title: {text: 'All of these names are dumb'},
+        title: {text: 'Money time'},
         data: [{
             type: "line",
             color: "black",

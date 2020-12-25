@@ -117,9 +117,9 @@ function App() {
   return (
     <div className='container'>
       <div className="monthDisplay">
-        <button disabled={!prevCheck} onClick={()=>setMonth(lastMonth)}>Last Month</button>
+        {prevCheck && <button disabled={!prevCheck} onClick={()=>setMonth(lastMonth)}>Last Month</button>}
         <h1>{month}</h1>
-        <button disabled={!nextCheck} onClick={()=>setMonth(nextMonth)}>Next Month</button>
+        {nextCheck && <button disabled={!nextCheck} onClick={()=>setMonth(nextMonth)}>Next Month</button>}
       </div>
       <div className='incomeExpense'>
         <div className='income'>
